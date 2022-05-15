@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:provider/provider.dart';
 //*This is a Git push test 2
+//*Another comment */
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
