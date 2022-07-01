@@ -15,7 +15,7 @@ class _MessagesPageState extends State<MessagesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: CustomColors.primaryLightBlue,
+        backgroundColor: CustomColors.primaryNormalBlue,
         onPressed: () {
           Navigator.pushNamed(context, SearchPage.pageRout);
         },

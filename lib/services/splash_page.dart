@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:care_connect/pages/doctor_pages/doctor_main_page.dart';
 import 'package:care_connect/pages/main_page.dart';
 import 'package:care_connect/pages/messages_page.dart';
+import 'package:care_connect/pages/patient_pages/patient_main_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +40,9 @@ class _SplashPageState extends State<SplashPage> {
     });
 
     if (role == 'patient') {
-      navigateNext(const MainPage());
+      navigateNext(const PatientMainPage());
     } else if (role == 'doctor') {
-      navigateNext(const MainPage());
+      navigateNext(const DoctorMainPage());
     }
   }
 

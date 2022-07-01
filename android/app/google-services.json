@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:376747866363:android:8083f62b919f1a5d6d185e",
+        "android_client_info": {
+          "package_name": "com.example.care_connect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376747866363-3o3p5fem6ajm6bo4vj81gro5a35ae264.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG8KslaVEPZt0JW--MbPYfTRzZklwLFu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376747866363-3o3p5fem6ajm6bo4vj81gro5a35ae264.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:376747866363:android:fc9b79388631d0346d185e",
         "android_client_info": {
           "package_name": "sa.almahdi.care_connect_app"

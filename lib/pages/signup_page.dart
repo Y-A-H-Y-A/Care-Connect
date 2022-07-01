@@ -250,8 +250,7 @@ class _SignUpState extends State<SignUp> {
                     print(e.toString());
                     // TODO
                   }
-                  Navigator.pushReplacementNamed(
-                      context, AuthenticationWapper.pageRout);
+                  Navigator.pushReplacementNamed(context, Login.pageRout);
                 },
                 child: Text(
                   'Sign Up',

@@ -1,3 +1,4 @@
+import 'package:care_connect/services/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -96,6 +97,7 @@ class Login extends StatelessWidget {
                         email: email,
                         password: password,
                       );
+                  Navigator.pushNamed(context, SplashPage.pageRout);
                 },
                 child: Text(
                   'Sign in',

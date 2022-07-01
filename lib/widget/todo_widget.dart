@@ -1,8 +1,6 @@
-This is just a testing text file for git
-
-Adding this line from the remote repo to test the pull from my vs code
-
+import 'package:care_connect/api/notification_api.dart';
 import 'package:care_connect/model/todos_model.dart';
+import 'package:care_connect/pages/remainder_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +10,8 @@ import '../model/users_data.dart';
 import '../pages/edit_todo_page.dart';
 import '../providers/todos_provider.dart';
 import '../utils.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class TodoWidget extends StatefulWidget {
   final Todo todo;
@@ -26,6 +26,23 @@ class TodoWidget extends StatefulWidget {
 
 class _TodoWidgetState extends State<TodoWidget> {
   TimeOfDay time = TimeOfDay(hour: 10, minute: 30);
+  @override
+  void initState() {
+    super.initState();
+
+    NotificationApi.init();
+    listenNotifications();
+  }
+
+  void listenNotifications() =>
+      NotificationApi.onNotifications.stream.listen(onClickedNotification);
+
+  void onClickedNotification(String? payload) => Navigator.pushNamed(
+        context,
+        ReminderPage.pageRout,
+      );
+  // Navigator.of(context).push(
+  //     MaterialPageRoute(builder: (context) => ReminderPage(payload: payload)));
 
   // DateTime selectedDate = DateTime.now();
 
@@ -125,38 +142,52 @@ class _TodoWidgetState extends State<TodoWidget> {
                       const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
-                          height: 45,
-                          width: 100,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: CustomColors.primaryLightBlue,
-                              side: const BorderSide(
-                                  color: Colors.white, width: 1),
-                              shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(10), // <-- Radius
-                              ),
-                            ),
-                            onPressed: () async {
-                              TimeOfDay? newTime = await showTimePicker(
-                                context: context,
-                                initialTime: time,
-                              );
+                      Row(
+                        children: [
+                          SizedBox(
+                              height: 45,
+                              width: 100,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: CustomColors.primaryLightBlue,
+                                  side: const BorderSide(
+                                      color: Colors.white, width: 1),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10), // <-- Radius
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  TimeOfDay? newTime = await showTimePicker(
+                                    context: context,
+                                    initialTime: time,
+                                  );
 
-                              //?if 'CANCLE' => null
-                              if (newTime == null) return;
-                              //? if 'OK' => TimeOfDay
-                              setState(() => time = newTime);
-                            },
-                            child: Text('$hours : $minutes',
-                                textAlign: TextAlign.left,
-                                style: CustomTextStyle.style(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.white,
-                                )),
-                          )),
+                                  //?if 'CANCLE' => null
+                                  if (newTime == null) return;
+                                  //? if 'OK' => TimeOfDay
+                                  setState(() => time = newTime);
+                                },
+                                child: Text('$hours : $minutes',
+                                    textAlign: TextAlign.left,
+                                    style: CustomTextStyle.style(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white,
+                                    )),
+                              )),
+                          const SizedBox(width: 10),
+                          //? The "Notify me" button
+                          ElevatedButton(
+                            onPressed: () => NotificationApi.showNotification(
+                              title: widget.todo.title,
+                              body: widget.todo.description,
+                              payload: '',
+                            ),
+                            child: const Text("Notify me"),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -181,4 +212,3 @@ class _TodoWidgetState extends State<TodoWidget> {
         ),
       );
 }
-
